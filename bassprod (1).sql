@@ -21,22 +21,6 @@ SET time_zone = "+00:00";
 -- Base de datos: `bassprod`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `asistencias`
---
-
-CREATE TABLE `asistencias` (
-  `Statu` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `asistencias`
---
-
-INSERT INTO `asistencias` (`Statu`) VALUES
-('aprobado');
 
 -- --------------------------------------------------------
 
