@@ -31,7 +31,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `detalles_pedido` (
   `Cantidad` int(11) NOT NULL,
   `Id_orden` int(11) NOT NULL,
-  `Id_producto` int(11) NOT NULL
+  `Id_producto` int(11) NOT NULL,
+  'Precio_u' int(11) Not null,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -219,7 +220,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indices de la tabla `detalles_pedido`
 --
 ALTER TABLE `detalles_pedido`
-  ADD PRIMARY KEY (`Id_orden`,`Id_producto`),
+  ADD PRIMARY KEY (`Id_orden`,`Id_producto`,`Precio_u`),
   ADD KEY `idproducto` (`Id_producto`);
 
 --
@@ -246,7 +247,7 @@ ALTER TABLE `orden`
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD PRIMARY KEY (`Id_producto`,`Nombre`);
+  ADD PRIMARY KEY (`Id_producto`,`Precio`);
 
 --
 -- Indices de la tabla `proveedor`
