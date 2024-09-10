@@ -32,7 +32,7 @@ CREATE TABLE `detalles_pedido` (
   `Cantidad` int(11) NOT NULL,
   `Id_orden` int(11) NOT NULL,
   `Id_producto` int(11) NOT NULL,
-  'Precio_u' int(11) Not null,
+  `Precio_u` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
