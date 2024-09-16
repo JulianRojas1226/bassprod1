@@ -36,7 +36,7 @@ END$$
 
 DELIMITER ;
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `detalles_pedido`
@@ -87,7 +87,7 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `empleado`
@@ -105,7 +105,7 @@ CREATE TABLE `empleado` (
 INSERT INTO `empleado` (`Id`, `Nom_empeado`) VALUES
 (10, 'julian');
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `mesa`
@@ -123,7 +123,7 @@ CREATE TABLE `mesa` (
 INSERT INTO `mesa` (`Id_mesa`, `estado`) VALUES
 (1, 'disponible');
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura Stand-in para la vista `mesa_ocupada`
@@ -133,7 +133,7 @@ CREATE TABLE `mesa_ocupada` (
 `mesa` int(11)
 );
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `orden`
@@ -154,7 +154,7 @@ CREATE TABLE `orden` (
 INSERT INTO `orden` (`Id_orden`, `fecha`, `mesa`, `Id_us`, `fecha_hora`) VALUES
 (1, '2024-09-10 06:17:12', 1, 10, NULL);
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `pagos`
@@ -168,7 +168,7 @@ CREATE TABLE `pagos` (
   `Metodo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `producto`
@@ -203,7 +203,7 @@ INSERT INTO `producto` (`Id_producto`, `Nombre`, `Can_ml`, `Precio`, `Proveedor`
 (12, 'Costeña', 330, 3500, 'Wilson', 'disponible', '15'),
 (13, 'Tecate', 330, 3500, 'Wilson', 'disponible', '10');
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `proveedor`
@@ -216,7 +216,7 @@ CREATE TABLE `proveedor` (
   `Id_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `reservas`
@@ -232,7 +232,7 @@ CREATE TABLE `reservas` (
   `numero_reserva` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura Stand-in para la vista `vistaproductoagotado`
@@ -242,7 +242,7 @@ CREATE TABLE `vistaproductoagotado` (
 `nombre` varchar(50)
 );
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura Stand-in para la vista `vistaproductodisponible`
@@ -251,8 +251,16 @@ CREATE TABLE `vistaproductoagotado` (
 CREATE TABLE `vistaproductodisponible` (
 `nombre` varchar(50)
 );
+-- ----------------------------------------------------------------------------------------------------------------
 
--- --------------------------------------------------------
+--
+-- Estructura para la vista `mesa_disponible`
+--
+DROP TABLE IF EXISTS `mesa_disponible`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mesa_disponible`  AS SELECT `orden`.`mesa` AS `mesa` FROM (`orden` join `mesa` on(`orden`.`mesa` = `mesa`.`Id_mesa`)) ;
+
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura para la vista `mesa_ocupada`
@@ -261,8 +269,16 @@ DROP TABLE IF EXISTS `mesa_ocupada`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mesa_ocupada`  AS SELECT `orden`.`mesa` AS `mesa` FROM (`orden` join `mesa` on(`orden`.`mesa` = `mesa`.`Id_mesa`)) ;
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
+--
+-- Estructura para la vista `mesa_ocupada`
+--
+DROP TABLE IF EXISTS `mesa_reserevada`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `mesa_reservada`  AS SELECT `orden`.`mesa` AS `mesa` FROM (`orden` join `mesa` on(`orden`.`mesa` = `mesa`.`Id_mesa`)) ;
+
+-- ----------------------------------------------------------------------------------------------------------------
 --
 -- Estructura para la vista `vistaproductoagotado`
 --
@@ -270,7 +286,7 @@ DROP TABLE IF EXISTS `vistaproductoagotado`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vistaproductoagotado`  AS SELECT `producto`.`Nombre` AS `nombre` FROM `producto` WHERE `producto`.`Cantidad` < 15 ;
 
--- --------------------------------------------------------
+-- ----------------------------------------------------------------------------------------------------------------
 
 --
 -- Estructura para la vista `vistaproductodisponible`
