@@ -121,7 +121,11 @@ CREATE TABLE `mesa` (
 --
 
 INSERT INTO `mesa` (`Id_mesa`, `estado`) VALUES
-(1, 'disponible');
+(1, 'disponible'),
+(2, 'ocupada'),
+(3, 'reservada'),
+(4, 'disponible');
+(5, 'reservada');
 
 -- ----------------------------------------------------------------------------------------------------------------
 
